@@ -1,0 +1,86 @@
+/* ── NAVBAR ── */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 20px 6vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.4s ease;
+  padding: 10px !important;
+  padding-bottom: 0px;
+}
+
+.navbar.scrolled {
+  background: rgba(4,4,15,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 6vw;
+}
+
+.navbar-logo {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--white);
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar-logo img {
+  margin-right: 10px;
+  width: 30px;
+  height: auto;
+}
+
+.navbar-logo span {
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.navbar-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--violet-light);
+  border: 1px solid var(--border);
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  background: var(--violet-dim);
+  backdrop-filter: blur(8px);
+}
+
+.navbar-badge .pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--violet-light);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(129,140,248,0.4); }
+  50%       { opacity: 0.8; transform: scale(1.15); box-shadow: 0 0 0 4px rgba(129,140,248,0); }
+}
+
+@media (max-width: 480px) {
+  .navbar { padding: 16px 5vw; }
+  .navbar-badge { display: none; }
+  .navbar-logo img {
+    margin-right: 5px;
+    width: 20px;
+    height: auto;
+  }
+}
