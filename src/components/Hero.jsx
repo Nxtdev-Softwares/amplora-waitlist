@@ -6,6 +6,8 @@ export default function Hero() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState(false)
 
+  const [showPopup, setShowPopup] = useState(false)
+
   const isValidEmail = (email) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
@@ -61,7 +63,7 @@ export default function Hero() {
 
       // Common after-success logic
       setEmail("");
-
+      setShowPopup(true);
       setTimeout(() => setError(""), 3000);
 
     } catch (err) {
@@ -73,6 +75,7 @@ export default function Hero() {
   };
 
   return (
+    <>
     <section className="hero">
       {/* Decorative rings */}
       <div className="hero-ring" />
@@ -136,6 +139,74 @@ export default function Hero() {
         </div>
         <span className="scroll-text">Scroll</span>
       </div>
-    </section>
+    </section> 
+
+    {/* ── EMAIL REMINDER POPUP ── */}
+      {showPopup && (
+        <div className="popup-overlay" onClick={() => setShowPopup(false)}>
+          <div className="popup-card" onClick={e => e.stopPropagation()}>
+
+            <button
+              className="popup-close"
+              onClick={() => setShowPopup(false)}
+              aria-label="Close"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+
+            <div className="popup-icon-wrap">
+              <div className="popup-icon-ring" />
+              <div className="popup-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                  <rect x="2" y="4" width="20" height="16" rx="3" />
+                  <polyline points="2,4 12,13 22,4" />
+                </svg>
+              </div>
+            </div>
+
+            <h3 className="popup-title">Check your inbox!</h3>
+            <p className="popup-body">
+              We just sent a confirmation email to{' '}
+              <strong>{email}</strong>.<br />
+              It should arrive within the next few minutes.
+            </p>
+
+            <div className="popup-steps">
+              <div className="popup-step">
+                <div className="popup-step-num">1</div>
+                <span>Open your inbox</span>
+              </div>
+              <div className="popup-step-arrow">→</div>
+              <div className="popup-step">
+                <div className="popup-step-num">2</div>
+                <span>Find the email from Amplora</span>
+              </div>
+              <div className="popup-step-arrow">→</div>
+              <div className="popup-step">
+                <div className="popup-step-num">3</div>
+                <span>Confirm your spot</span>
+              </div>
+            </div>
+
+            <p className="popup-spam">
+              <svg className="d-none d-md-flex" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="14" height="14">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
+              Can't find it? Check your spam or promotions folder.
+            </p>
+
+            <button className="popup-cta" onClick={() => setShowPopup(false)}>
+              Got it, I'll check my inbox
+            </button>
+          </div>
+        </div>
+      )}
+
+  </>
   )
 }
