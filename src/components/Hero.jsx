@@ -88,7 +88,7 @@ export default function Hero() {
 
       <h1 className="hero-headline">
         Stop posting
-        <span className="hero-headline-accent">into the void.</span>
+        <span className="hero-headline-accent mt-1">into the void</span>
       </h1>
 
       <p className="hero-sub">
